@@ -130,7 +130,7 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'get_Started') {
+  if (payload === 'get_started') {
     response = { "text": "Oops, try sending another image." };
     callSendAPI(sender_psid, response);
   } else if (payload === 'no') {
