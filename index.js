@@ -130,11 +130,11 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === '<postback_payload>') {
+  if (payload === 'get_started') {
     response = askTemplate('What would you like to eat?')
     //callSendAPI(sender_psid, response);
   } 
-  else if(payload == 'japanese') {
+  else if(payload === 'japanese') {
     response = {"text": "List Options"}
     //callSendAPI(sender_psid, response);
   }
