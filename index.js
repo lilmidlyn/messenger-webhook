@@ -131,7 +131,7 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'get_Started') {
-    response = askTemplate('Are you ready to make a bet?');
+    response = { "text": "Oops, try sending another image." };
     callSendAPI(sender_psid, response);
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
