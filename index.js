@@ -133,8 +133,12 @@ function handlePostback(sender_psid, received_postback) {
   if (payload === '<postback_payload>') {
     response = askTemplate('Are you ready to make a bet?')
     callSendAPI(sender_psid, response);
-  } else if (payload === 'no') {
-    response = { "text": "Oops, try sending another image." }
+  } 
+  else if(payload == 'Yes') {
+    respnse = {text: "What would you like to bet?"}
+  }
+  else if (payload === 'No') {
+    response = { "text": "Ok, maybe next time." }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
