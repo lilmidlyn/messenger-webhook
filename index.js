@@ -131,8 +131,8 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === '<postback_payload>') {
-    response = askTemplate('Are you ready to make a bet?')
-    callSendAPI(sender_psid, response);
+    response = askTemplate('What would you like to eat?')
+    //callSendAPI(sender_psid, response);
   } 
   else if(payload == 'yes_button') {
     response = {text: "What would you like to bet?"}
