@@ -135,7 +135,8 @@ function handlePostback(sender_psid, received_postback) {
     callSendAPI(sender_psid, response);
   } 
   else if(payload == 'yes_button') {
-    respnse = {text: "What would you like to bet?"}
+    response = {text: "What would you like to bet?"}
+    callSendAPI(sender_psid, response);
   }
   else if (payload === 'no_button') {
     response = { "text": "Ok, maybe next time." }
