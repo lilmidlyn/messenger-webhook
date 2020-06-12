@@ -134,12 +134,12 @@ function handlePostback(sender_psid, received_postback) {
     response = askTemplate('What would you like to eat?')
     //callSendAPI(sender_psid, response);
   } 
-  else if(payload == 'yes_button') {
-    response = {text: "What would you like to bet?"}
-    callSendAPI(sender_psid, response);
+  else if(payload == 'japanese') {
+    response = {"text": "List Options"}
+    //callSendAPI(sender_psid, response);
   }
-  else if (payload === 'no_button') {
-    response = { "text": "Ok, maybe next time." }
+  else if (payload === 'chinese') {
+    response = { "text": "List Options" }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
