@@ -130,14 +130,39 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { "text": "Thanks!" }
+  if (payload === 'GET_STARTED') {
+    response = askTemplate('Are you ready to make a bet?');
+    callSendAPI(sender_psid, response);
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
+
+const askTemplate = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Yes",
+                        "payload":"yes_button"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"No",
+                        "payload":"no_button"
+                    }
+                ]
+            }
+        }
+    }
+  }
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
