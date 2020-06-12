@@ -130,7 +130,7 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'get_started') {
+  if (payload === '<postback_payload>') {
     response = askTemplate('Are you ready to make a bet?')
     callSendAPI(sender_psid, response);
   } else if (payload === 'no') {
