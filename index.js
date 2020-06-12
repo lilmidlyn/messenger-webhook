@@ -134,10 +134,10 @@ function handlePostback(sender_psid, received_postback) {
     response = askTemplate('Are you ready to make a bet?')
     callSendAPI(sender_psid, response);
   } 
-  else if(payload == 'Yes') {
+  else if(payload == 'yes_button') {
     respnse = {text: "What would you like to bet?"}
   }
-  else if (payload === 'No') {
+  else if (payload === 'no_button') {
     response = { "text": "Ok, maybe next time." }
   }
   // Send the message to acknowledge the postback
