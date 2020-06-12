@@ -155,13 +155,18 @@ const askTemplate = (text) => {
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Yes",
-                        "payload":"yes_button"
+                        "title":"Chinese",
+                        "payload":"chinese"
                     },
                     {
                         "type":"postback",
-                        "title":"No",
-                        "payload":"no_button"
+                        "title":"Japanese",
+                        "payload":"japanese"
+                    }
+                    {
+                        "type":"postback",
+                        "title":"Korean",
+                        "payload":"korean"
                     }
                 ]
             }
