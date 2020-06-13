@@ -134,11 +134,11 @@ function handlePostback(sender_psid, received_postback) {
     response = ifEmergency('Is this an emergency?')
     //callSendAPI(sender_psid, response);
   } 
-  else if(payload === 'yes_emergency') {
-    response = { "text" : "Please dial 911.")
+  else if(payload == 'isnotemergency') {
+    response = askHelp('How can I help?')
   }
-  else if (payload === 'no_emergency') {
-    response = whatToDo('How can I help?') }
+  else if (payload === 'preference') {
+    response = { "text": "Please dial 911." }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -154,13 +154,13 @@ const ifEmergency = (text) => {
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"yes_emergency",
-                        "payload":"preference"
+                        "title":"Yes",
+                        "payload":"isemergency"
                     },
                     {
                         "type":"postback",
                         "title":"No",
-                        "payload":"no_emergency"
+                        "payload":"isnotemergency"
                     }
 
                 ]
@@ -169,7 +169,7 @@ const ifEmergency = (text) => {
     }
   }
 
-const whatToDo = (text) => {
+const askHelp = (text) => {
   return {
     "attachment":{
             "type":"template",
@@ -179,13 +179,13 @@ const whatToDo = (text) => {
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Seek medical help",
-                        "payload":"medicalhelp"
+                        "title":"Japanese",
+                        "payload":"japanese"
                     },
                     {
                         "type":"postback",
-                        "title":"Report to authorities",
-                        "payload":"report"
+                        "title":"Chinese",
+                        "payload":"chinese"
                     },
                     //{
                       //  "type":"postback",
