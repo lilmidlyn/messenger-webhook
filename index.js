@@ -132,7 +132,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
   if (payload === 'get_started') {
     response = askTemplate('What would you like to eat?')
-    //callSendAPI(sender_psid, response);
+    callSendAPI(sender_psid, response);
   } 
   else if(payload === 'japanese') {
     response = {"text": "List Options"}
