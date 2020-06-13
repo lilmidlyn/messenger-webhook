@@ -134,7 +134,7 @@ function handlePostback(sender_psid, received_postback) {
     response = ifEmergency('Is this an emergency?')
     //callSendAPI(sender_psid, response);
   } 
-  else if(payload == 'yes_emergency') {
+  else if(payload === 'yes_emergency') {
     response = { "text" : "Please dial 911.")
   }
   else if (payload === 'no_emergency') {
@@ -144,7 +144,7 @@ function handlePostback(sender_psid, received_postback) {
   callSendAPI(sender_psid, response);
 }
 
-const ifPref = (text) => {
+const ifEmergency = (text) => {
   return {
     "attachment":{
             "type":"template",
