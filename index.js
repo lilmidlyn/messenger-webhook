@@ -151,7 +151,7 @@ const ifEmergency = (text) => {
             "payload":{
                 "template_type":"button",
                 "text": text,
-                "button":[
+                "buttons":[
                     {
                         "type":"postback",
                         "title":"yes_emergency",
