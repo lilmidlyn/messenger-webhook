@@ -131,21 +131,45 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === '<postback_payload>') {
-    response = askTemplate('What would you like to eat?')
+    response = ifPref('Do you have a pref?')
     //callSendAPI(sender_psid, response);
   } 
-  else if(payload == 'japanese') {
-    response = {text: "What would you like to bet?"}
-    callSendAPI(sender_psid, response);
+  else if(payload == 'preference') {
+    response = askPref('What would you like to eat?')
   }
-  else if (payload === 'chinese') {
+  else if (payload === 'preference') {
     response = { "text": "Ok, maybe next time." }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
 
-const askTemplate = (text) => {
+const ifPref = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"I have a preference",
+                        "payload":"preference"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"No preference",
+                        "payload":"nopreference"
+                    }
+
+                ]
+            }
+        }
+    }
+  }
+
+const askPref = (text) => {
   return {
     "attachment":{
             "type":"template",
@@ -162,7 +186,13 @@ const askTemplate = (text) => {
                         "type":"postback",
                         "title":"Chinese",
                         "payload":"chinese"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Mediterranean",
+                        "payload":"mediterranean"
                     }
+
                 ]
             }
         }
