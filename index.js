@@ -187,11 +187,11 @@ const askPref = (text) => {
                         "title":"Chinese",
                         "payload":"chinese"
                     },
-                    {
-                        "type":"postback",
-                        "title":"Mediterranean",
-                        "payload":"mediterranean"
-                    }
+                    //{
+                      //  "type":"postback",
+                        //"title":"Mediterranean",
+                        //"payload":"mediterranean"
+                    //}
 
                 ]
             }
