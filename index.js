@@ -131,14 +131,14 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === '<postback_payload>') {
-    response = ifPref('Do you have a pref?')
+    response = ifEmergency('Is this an emergency?')
     //callSendAPI(sender_psid, response);
   } 
-  else if(payload == 'preference') {
-    response = askPref('What would you like to eat?')
+  else if(payload == 'yes_emergency') {
+    response = { "text" : "Please dial 911.")
   }
-  else if (payload === 'preference') {
-    response = { "text": "Ok, maybe next time." }
+  else if (payload === 'no_emergency') {
+    response = whatToDo('How can I help?') }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -149,18 +149,18 @@ const ifPref = (text) => {
     "attachment":{
             "type":"template",
             "payload":{
-                "template_type":"button",
+                "template_type":"quick_replies",
                 "text": text,
-                "buttons":[
+                "quick_replies":[
                     {
                         "type":"postback",
-                        "title":"I have a preference",
+                        "title":"yes_emergency",
                         "payload":"preference"
                     },
                     {
                         "type":"postback",
-                        "title":"No preference",
-                        "payload":"nopreference"
+                        "title":"No",
+                        "payload":"no_emergency"
                     }
 
                 ]
@@ -187,7 +187,7 @@ const askPref = (text) => {
                         "title":"Chinese",
                         "payload":"chinese"
                     },
-                    //{
+                    {
                       //  "type":"postback",
                         //"title":"Mediterranean",
                         //"payload":"mediterranean"
