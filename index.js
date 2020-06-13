@@ -149,9 +149,9 @@ const ifEmergency = (text) => {
     "attachment":{
             "type":"template",
             "payload":{
-                "template_type":"quick_replies",
+                "template_type":"buttons",
                 "text": text,
-                "quick_replies":[
+                "buttons":[
                     {
                         "type":"postback",
                         "title":"yes_emergency",
@@ -169,7 +169,7 @@ const ifEmergency = (text) => {
     }
   }
 
-const askPref = (text) => {
+const whatToDo = (text) => {
   return {
     "attachment":{
             "type":"template",
@@ -179,15 +179,15 @@ const askPref = (text) => {
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Japanese",
-                        "payload":"japanese"
+                        "title":"Seek medical help",
+                        "payload":"medicalhelp"
                     },
                     {
                         "type":"postback",
-                        "title":"Chinese",
-                        "payload":"chinese"
+                        "title":"Report to authorities",
+                        "payload":"report"
                     },
-                    {
+                    //{
                       //  "type":"postback",
                         //"title":"Mediterranean",
                         //"payload":"mediterranean"
