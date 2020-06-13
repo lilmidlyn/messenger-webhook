@@ -130,16 +130,16 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload == 'get_started') {
+  if (payload === '<postback_payload>') {
     response = askTemplate('What would you like to eat?')
-    callSendAPI(sender_psid, response);
-  } 
-  else if(payload == 'japanese') {
-    response = {"text": "List Options"}
     //callSendAPI(sender_psid, response);
+  } 
+  else if(payload == 'yes_button') {
+    response = {text: "What would you like to bet?"}
+    callSendAPI(sender_psid, response);
   }
-  else if (payload == 'chinese') {
-    response = { "text": "List Options" }
+  else if (payload === 'no_button') {
+    response = { "text": "Ok, maybe next time." }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -155,18 +155,13 @@ const askTemplate = (text) => {
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Chinese",
-                        "payload":"chinese"
+                        "title":"Yes",
+                        "payload":"yes_button"
                     },
                     {
                         "type":"postback",
-                        "title":"Japanese",
-                        "payload":"japanese"
-                    }
-                    {
-                        "type":"postback",
-                        "title":"Korean",
-                        "payload":"korean"
+                        "title":"No",
+                        "payload":"no_button"
                     }
                 ]
             }
@@ -186,7 +181,7 @@ function callSendAPI(sender_psid, response) {
   // Send the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": EAAQNZBZBdZAoicBAJh9srH7URPtZCAcXXs9jqesxYdFlKuZBmZBq7ykQLKLwzv1XZA9UzoXqlzCUPMJLQCzQs162rJFHnHKtS3mRygRuFZA5SKLq7NDVn1d4I7Un5bAa1lHZClf24i7K16dRXt40NVZA0t455mVI87rJ45aWSdLZBdlLFodalUAH7DG },
+    "qs": { "access_token": PAGE_ACCESS_TOKEN },
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {
