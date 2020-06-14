@@ -137,13 +137,13 @@ function handlePostback(sender_psid, received_postback) {
   else if(payload === 'isnotemergency') {
     response = askHelp('How can I help?')
   }
-  else if (payload === 'preference') {
+  else if (payload === 'isemergency') {
     response = { "text": "Please dial 911." }
   }
   else if (payload === 'notsure') {
-    informationresponse = 'It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources.'
+    informationresponse = {"text" :'It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.'}
     callSendAPI(sender_psid, informationresponse);
-    response = ifNotSure('Is it recent?')
+    response = continue1('Is it recent?')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
