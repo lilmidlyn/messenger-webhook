@@ -134,11 +134,16 @@ function handlePostback(sender_psid, received_postback) {
     response = ifEmergency('Is this an emergency?')
     //callSendAPI(sender_psid, response);
   } 
-  else if(payload == 'isnotemergency') {
+  else if(payload === 'isnotemergency') {
     response = askHelp('How can I help?')
   }
   else if (payload === 'preference') {
     response = { "text": "Please dial 911." }
+  }
+  else if (payload === 'notsure') {
+    informationresponse = 'It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources.'
+    callSendAPI(sender_psid, informationresponse);
+    response = ifNotSure('Is it recent?')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -179,19 +184,19 @@ const askHelp = (text) => {
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Japanese",
-                        "payload":"japanese"
+                        "title": "Need medical help",
+                        "payload":"medicalhelp"
                     },
                     {
                         "type":"postback",
-                        "title":"Chinese",
-                        "payload":"chinese"
+                        "title":"Report to authorities",
+                        "payload":"report"
                     },
-                    //{
-                      //  "type":"postback",
-                        //"title":"Mediterranean",
-                        //"payload":"mediterranean"
-                    //}
+                    {
+                        "type":"postback",
+                        "title":"I'm not sure",
+                        "payload":"notsure"
+                    }
 
                 ]
             }
