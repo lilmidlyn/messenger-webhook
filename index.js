@@ -142,15 +142,14 @@ function handlePostback(sender_psid, received_postback) {
     response = askHelp('How can I help?')
   }
   else if (payload === 'isemergency') {
-    response = call911('Would you like to call 911?')
+    response = {"text" :'isemergency'}
+    //response = call911('Would you like to call 911?')
   }
   else if(payload === 'medicalhelp') {
     response = locatemedical('Please share your location so we can find the nearest health centers')
   }
   else if (payload === 'notsure') {
     response = {"text" :'It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.'}
-
-    callSendAPI(sender_psid, response)
     
   }
   // Send the message to acknowledge the postback
@@ -218,7 +217,7 @@ const call911 = (text) => {
             "type":"template",
             "payload":{
                 "template_type":"button",
-                //"text": text,
+                "text": text,
                 "buttons":[
                     {
                         "type":"phone_number",
