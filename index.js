@@ -188,26 +188,6 @@ const confidvsnon = (text) => {
     }
 }
 
-const confidentialResources = (text) => {
-  return {
-    "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"list",
-                "top_element_style": "compact",
-                "elements":[
-                    {
-                      "type": "web_url"
-                      "url": "https://www.rainn.org/articles/reporting-law-enforcement"
-                      "title":"RAINN",
-                    }
-
-                ]
-            }
-        }
-    }
-}
-
 const ifEmergency = (text) => {
   return {
     "attachment":{
