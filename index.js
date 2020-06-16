@@ -90,8 +90,21 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text) {    
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
+
+    let address = received_message.text[0]
+    text = `Search for medical centers around this address: "${received_message.text}"?`
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "button",
+          "text": text,
+          "buttons": [
+            "type": "postback",
+            "title": "Yes",
+            "payload": "confirmedlocation"          ]
+        }
+      }
     }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -145,7 +158,7 @@ function handlePostback(sender_psid, received_postback) {
     response = call911('Would you like to call 911?')
   }
   else if (payload === 'medicalhelp') {
-    response = locatemedical('Please share your location so we can find the nearest health centers')
+    response = {"text" : 'Please share your address so we can find the nearest health centers'}
   }
   else if (payload === 'notsure') {
     response = {"text" :'It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.'}
@@ -229,20 +242,6 @@ const call911 = (text) => {
     }
   }
 
-  //const locatemedical = (text) => {
-    //return {
-      //"messaging_type" : "RESPONSE",
-      //"message" : {
-        //"text": text,
-        //"quick_replies": [
-        //{
-          //"content_type" = "location"
-          //"title" : "Send location"
-          //"payload" : "locationsent"
-        //}]
-      //}
-    //}
-  //}
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
