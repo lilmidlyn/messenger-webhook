@@ -1,4 +1,3 @@
-
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
@@ -85,8 +84,7 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
- // console.log ('handleMEssage message:', JSON.stringify(received_message))
-
+  
   // Checks if the message contains text
   if (received_message.text) {    
     // Create the payload for a basic text message, which
@@ -244,6 +242,7 @@ const call911 = (text) => {
       }
     }
   }
+  
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
