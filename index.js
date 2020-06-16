@@ -234,9 +234,9 @@ const call911 = (text) => {
       "text": text,
       "quick_replies" : [
       {
-        "content_type":"text",
-          "title":"Yes!",
-          "payload": "sentlocation"
+        "content_type":"location",
+        "title":"Send location",
+        "payload": "sentlocation"
       }]
     }
   }
