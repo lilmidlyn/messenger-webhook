@@ -91,14 +91,14 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
 
-    let address = received_message.text
-    text = `Search for medical centers around this address: "${received_message.text}"?`
+    //let address = received_message.text
+    //text = `Search for medical centsers around this address: "${received_message.text}"?`
     response = {
       "attachment": {
         "type": "template",
         "payload": {
           "template_type": "button",
-          "text": text,
+          "text": "text",
           "buttons": [
             "type": "postback",
             "title": "Yes",
