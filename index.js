@@ -1,3 +1,4 @@
+
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
@@ -242,7 +243,6 @@ const call911 = (text) => {
       }
     }
   }
-  
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
