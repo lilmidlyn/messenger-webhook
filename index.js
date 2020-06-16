@@ -85,7 +85,8 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  
+  console.log ('handleMEssage message:', JSON.stringify(received_message))
+
   // Checks if the message contains text
   if (received_message.text) {    
     // Create the payload for a basic text message, which
@@ -231,13 +232,16 @@ const call911 = (text) => {
 
   const locatemedical = (text) => {
     return {
-      "text": text,
-      "quick_replies" : [
-      {
-        "content_type":"location",
-        "title":"Send location",
-        "payload": "sentlocation"
-      }]
+      "messaging_type" : "RESPONSE",
+      "message" : {
+        "text": text,
+        "quick_replies": [
+        {
+          "content_type" = "location"
+          "title" : "Send location"
+          "payload" : "locationsent"
+        }]
+      }
     }
   }
 
