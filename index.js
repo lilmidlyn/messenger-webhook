@@ -142,8 +142,8 @@ function handlePostback(sender_psid, received_postback) {
     response = askHelp('How can I help?')
   }
   else if (payload === 'isemergency') {
-    response = {"text" :'isemergency'}
-    //response = call911('Would you like to call 911?')
+    //response = {"text" :'isemergency'}
+    response = call911('Would you like to call 911?')
   }
   else if(payload === 'medicalhelp') {
     response = locatemedical('Please share your location so we can find the nearest health centers')
@@ -222,7 +222,7 @@ const call911 = (text) => {
                     {
                         "type":"phone_number",
                         "title":"Call 911",
-                        "payload":"+911"
+                        "payload":"+1911"
                     }
                 ]
             }
