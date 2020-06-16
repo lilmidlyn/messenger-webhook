@@ -229,20 +229,20 @@ const call911 = (text) => {
     }
   }
 
-  const locatemedical = (text) => {
-    return {
-      "messaging_type" : "RESPONSE",
-      "message" : {
-        "text": text,
-        "quick_replies": [
-        {
-          "content_type" = "location"
-          "title" : "Send location"
-          "payload" : "locationsent"
-        }]
-      }
-    }
-  }
+  //const locatemedical = (text) => {
+    //return {
+      //"messaging_type" : "RESPONSE",
+      //"message" : {
+        //"text": text,
+        //"quick_replies": [
+        //{
+          //"content_type" = "location"
+          //"title" : "Send location"
+          //"payload" : "locationsent"
+        //}]
+      //}
+    //}
+  //}
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
