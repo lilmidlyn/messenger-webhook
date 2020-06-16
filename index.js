@@ -91,7 +91,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
 
-    let address = received_message.text[0]
+    let address = received_message.text
     text = `Search for medical centers around this address: "${received_message.text}"?`
     response = {
       "attachment": {
