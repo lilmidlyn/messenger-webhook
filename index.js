@@ -146,12 +146,66 @@ function handlePostback(sender_psid, received_postback) {
   else if (payload === 'medicalhelp') {
     response = {"text": 'Please share your location so we can find the nearest health centers'}
   }
+  else if (payload === 'report') {
+    response = confidvsnon('Would you rather be a confidential reporter?')
+  }
+  else if (payload === 'confidential') {
+    response = confidentialResources('Here are some confidential resources:')
+  }
+  else if (payload === 'nonconfidential'){
+    response = nonconfidentialResources('Here are some nonconfidential resources:')
+  }
   else if (payload === 'notsure') {
     response = {"text" :'It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.'}
     
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
+}
+
+const confidvsnon = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
+            }
+        }
+    }
+}
+
+const confidentialResources = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"list",
+                "top_element_style": "compact",
+                "elements":[
+                    {
+                      "type": "web_url"
+                      "url": "https://www.rainn.org/articles/reporting-law-enforcement"
+                      "title":"RAINN",
+                    }
+
+                ]
+            }
+        }
+    }
 }
 
 const ifEmergency = (text) => {
