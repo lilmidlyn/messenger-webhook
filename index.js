@@ -147,7 +147,7 @@ function handlePostback(sender_psid, received_postback) {
     response = {"text": 'Please share your location so we can find the nearest health centers'}
   }
   else if (payload === 'report') {
-    response = confidvsnon('Would you rather be a confidential reporter?')
+    response = confidvsnon('Would you rather be speak to a confidential resource?')
   }
   else if (payload === 'confidential') {
     response = confidentialResources('Here are some confidential resources:')
@@ -156,14 +156,186 @@ function handlePostback(sender_psid, received_postback) {
     response = nonconfidentialResources('Here are some nonconfidential resources:')
   }
   else if (payload === 'notsure') {
-    response = {"text" :'It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.'}
+    response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')
     
+  }
+  else if (payload === 'underage') {
+    response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
+    
+  }
+  else if (payload === 'adult') {
+    response = adult('Is it recent?')
+  }
+  else if (payload === 'recent') {
+    response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
+  }
+  else if (payload === 'notrecent') {
+    response = notrecent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
 
+const notrecent = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Report",
+                        "payload":"report"
+                    }
+                ]
+            }
+        }
+    }
+}
+
+const recent = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Seek medical center",
+                        "payload":"medicalhelp"
+                    }
+                ]
+            }
+        }
+    }
+}
+
+const adult = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Yes",
+                        "payload":"recent"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"No",
+                        "payload":"notrecent"
+                    }
+
+                ]
+            }
+        }
+    }
+}
+
+const underage = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Yes",
+                        "payload":"report"
+                    }
+
+                ]
+            }
+        }
+    }
+}
+
+const notSure = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Under 18",
+                        "payload":"underage"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Over 18",
+                        "payload":"adult"
+                    }
+
+                ]
+            }
+        }
+    }
+}
+
 const confidvsnon = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
+            }
+        }
+    }
+}
+
+const confidentialResources= (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
+            }
+        }
+    }
+}
+
+
+const nonconfidentialResources= (text) => {
   return {
     "attachment":{
             "type":"template",
@@ -285,4 +457,25 @@ function callSendAPI(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   }); 
+}
+
+function callGeocodingApi(address, sender_psid, callback){
+  request({
+    "url": `${GOOGLE_GEOCODING_API}${address}&key=${GOOGLE_GEOCODING_API_KEY}`,
+    "method": "GET"
+  }, (err, res, body) => {
+    console.log('after calling geocoding api with result:', body);
+    if (err) {
+      console.error("Unable to retrieve location from Google API:", err);
+    } else {
+      const bodyObj = JSON.parse(body);
+      if (bodyObj.status === 'OK'){
+        if (bodyObj.results && bodyObj.results[0] && bodyObj.results[0].geometry && bodyObj.results[0].geometry.location){
+          callback(sender_psid, bodyObj.results[0].geometry.location, bodyObj.results[0].formatted_address);
+        }
+      } else{
+        console.error("Unable to retrieve location (status non-OK):", bodyObj);
+      }
+    }
+  });
 }
