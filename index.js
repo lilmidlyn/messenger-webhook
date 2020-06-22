@@ -156,10 +156,12 @@ function handlePostback(sender_psid, received_postback) {
     response = nonconfidentialResources('Here are some nonconfidential resources:')
   }
   else if (payload === 'notsure') {
-    response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')  
+    response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')
+    
   }
   else if (payload === 'underage') {
-    response = underage('All sexual encounters underage is sexual assault. Would you like to report it?') 
+    response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
+    
   }
   else if (payload === 'adult') {
     response = adult('Is it recent?')
@@ -168,12 +170,11 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('Would you rather speak to a confidentail resource?')
+    response = notrecent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
-
 
 const notrecent = (text) => {
   return {
@@ -185,15 +186,14 @@ const notrecent = (text) => {
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Seek medical center",
-                        "payload":"medicalhelp"
+                        "title":"Report",
+                        "payload":"report"
                     }
                 ]
             }
         }
     }
 }
-
 
 const recent = (text) => {
   return {
@@ -309,37 +309,23 @@ const confidvsnon = (text) => {
     }
 }
 
-const confidentialResource = (text) => {
+const confidentialResources= (text) => {
   return {
     "attachment":{
             "type":"template",
             "payload":{
-                "template_type":"list",
-                "top_element_style": "compact",
-                "elements":[
+                "template_type":"button",
+                "text": text,
+                "buttons":[
                     {
-                        "title":"RAINN",
-                        "buttons": [
-                        {
-                          "title": "Go",
-                          "type": "web_url"
-                          "url": "https://www.rainn.org/about-national-sexual-assault-telephone-hotline"
-                          "messenger_extensions": true
-                          "webview_height_ratio": "tall"
-
-                        }]
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
                     },
                     {
-                        "title":"YWCA",
-                        "buttons": [
-                        {
-                          "title": "Go",
-                          "type": "web_url"
-                          "url": "https://www.ywca.org/what-we-do/domestic-and-sexual-violence-services/"
-                          "messenger_extensions": true
-                          "webview_height_ratio": "tall"
-
-                        }]
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
                     }
 
                 ]
@@ -471,4 +457,25 @@ function callSendAPI(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   }); 
+}
+
+function callGeocodingApi(address, sender_psid, callback){
+  request({
+    "url": `${GOOGLE_GEOCODING_API}${address}&key=${GOOGLE_GEOCODING_API_KEY}`,
+    "method": "GET"
+  }, (err, res, body) => {
+    console.log('after calling geocoding api with result:', body);
+    if (err) {
+      console.error("Unable to retrieve location from Google API:", err);
+    } else {
+      const bodyObj = JSON.parse(body);
+      if (bodyObj.status === 'OK'){
+        if (bodyObj.results && bodyObj.results[0] && bodyObj.results[0].geometry && bodyObj.results[0].geometry.location){
+          callback(sender_psid, bodyObj.results[0].geometry.location, bodyObj.results[0].formatted_address);
+        }
+      } else{
+        console.error("Unable to retrieve location (status non-OK):", bodyObj);
+      }
+    }
+  });
 }
