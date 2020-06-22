@@ -168,10 +168,30 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = confidvsnon('Would you rather speak to a confidentail resource?')
+    response = notrecent('Would you rather speak to a confidentail resource?')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
+}
+
+
+const notrecent = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Seek medical center",
+                        "payload":"medicalhelp"
+                    }
+                ]
+            }
+        }
+    }
 }
 
 
