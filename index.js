@@ -454,24 +454,3 @@ function callSendAPI(sender_psid, response) {
     }
   }); 
 }
-
-function callGeocodingApi(address, sender_psid, callback){
-  request({
-    "url": `${GOOGLE_GEOCODING_API}${address}&key=${GOOGLE_GEOCODING_API_KEY}`,
-    "method": "GET"
-  }, (err, res, body) => {
-    console.log('after calling geocoding api with result:', body);
-    if (err) {
-      console.error("Unable to retrieve location from Google API:", err);
-    } else {
-      const bodyObj = JSON.parse(body);
-      if (bodyObj.status === 'OK'){
-        if (bodyObj.results && bodyObj.results[0] && bodyObj.results[0].geometry && bodyObj.results[0].geometry.location){
-          callback(sender_psid, bodyObj.results[0].geometry.location, bodyObj.results[0].formatted_address);
-        }
-      } else{
-        console.error("Unable to retrieve location (status non-OK):", bodyObj);
-      }
-    }
-  });
-}
