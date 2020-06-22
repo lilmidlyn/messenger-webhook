@@ -314,18 +314,30 @@ const confidentialResources= (text) => {
     "attachment":{
             "type":"template",
             "payload":{
-                "template_type":"button",
-                "text": text,
-                "buttons":[
+                "template_type":"list",
+                "top_element_style": "compact",
+                "elements":[
                     {
-                        "type":"postback",
-                        "title":"Confidential",
-                        "payload":"confidential"
+                        "title":"RAINN",
+                        "buttons": [
+                        {
+                          "title": "Go",
+                          "type": "web_url",
+                          "url": "https://centers.rainn.org/"
+                          "messenger_extensions": true,
+                          "webview_height_ratio": "tall"
+                        }]
                     },
                     {
-                        "type":"postback",
-                        "title":"Nonconfidential",
-                        "payload":"nonconfidential"
+                        "title":"RAINN",
+                        "buttons": [
+                        {
+                          "title": "Go",
+                          "type": "web_url",
+                          "url": "https://centers.rainn.org/"
+                          "messenger_extensions": true,
+                          "webview_height_ratio": "tall"
+                        }]
                     }
 
                 ]
