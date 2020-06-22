@@ -170,30 +170,12 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
+    response = confidvsnon('Would you rather speak to a confidentail resource?')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
 
-const notrecent = (text) => {
-  return {
-    "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text": text,
-                "buttons":[
-                    {
-                        "type":"postback",
-                        "title":"Report",
-                        "payload":"report"
-                    }
-                ]
-            }
-        }
-    }
-}
 
 const recent = (text) => {
   return {
@@ -309,23 +291,37 @@ const confidvsnon = (text) => {
     }
 }
 
-const confidentialResources= (text) => {
+const confidentialResources = (text) => {
   return {
     "attachment":{
             "type":"template",
             "payload":{
-                "template_type":"button",
-                "text": text,
-                "buttons":[
+                "template_type":"list",
+                "top_element_style": "compact",
+                "elements":[
                     {
-                        "type":"postback",
-                        "title":"Confidential",
-                        "payload":"confidential"
+                        "title":"RAINN",
+                        "buttons": [
+                        {
+                          "title": "Go",
+                          "type": "web_url"
+                          "url": "https://www.rainn.org/about-national-sexual-assault-telephone-hotline"
+                          "messenger_extensions": true
+                          "webview_height_ratio": "tall"
+
+                        }]
                     },
                     {
-                        "type":"postback",
-                        "title":"Nonconfidential",
-                        "payload":"nonconfidential"
+                        "title":"YWCA",
+                        "buttons": [
+                        {
+                          "title": "Go",
+                          "type": "web_url"
+                          "url": "https://www.ywca.org/what-we-do/domestic-and-sexual-violence-services/"
+                          "messenger_extensions": true
+                          "webview_height_ratio": "tall"
+
+                        }]
                     }
 
                 ]
