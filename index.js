@@ -264,13 +264,13 @@ const notSure = (text) => {
       "text": text,
       "quick_replies": [
         {
-         "content_type": "text"
-         "title": "Under 18"
+         "content_type": "text",
+         "title": "Under 18",
          "payload": "underage" 
         },
         {
-          "content_type": "text"
-          "title": "Over 18"
+          "content_type": "text",
+          "title": "Over 18",
           "payload": "adult"
         }
       ]
