@@ -338,6 +338,31 @@ const confidentialResources= (text) => {
     }
 }
 
+const confidentialResources= (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
+            }
+        }
+    }
+}
+
 
 const nonconfidentialResources= (text) => {
   return {
