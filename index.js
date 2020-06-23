@@ -276,7 +276,7 @@ const notSure = (text) => {
       ]
     }
   }
-}
+  
 
 
 const confidvsnon = (text) => {
