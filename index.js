@@ -160,7 +160,7 @@ function handlePostback(sender_psid, received_postback) {
   }
   else if (payload === 'underage') {
     response = underage("text": 'Does this work?')
-   // response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
+    //response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
   }
   else if (payload === 'adult') {
     response = adult('Is it recent?')
@@ -260,6 +260,7 @@ const underage = (text) => {
 
 const notSure = (text) => {
   return {
+      "text": text,
       "quick_replies": [
         {
          "content_type": "text",
