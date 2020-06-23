@@ -330,7 +330,7 @@ const confidentialResources= (text) => {
                           "title": "Go"
                         }
                         ]
-                    }ßßßß
+                    }
                 ]
             }
         }
