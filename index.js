@@ -325,11 +325,6 @@ const confidentialResources = (text) => {
               "type": "web_url",
               "url": "https://centers.rainn.org/",
               "title": "Open Web URL"
-            },
-            {
-              "type": "postback",
-              "title": "Call Postback",
-              "payload": "Payload for first bubble"
             }
           ]
         }
