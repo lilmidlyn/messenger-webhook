@@ -313,7 +313,7 @@ const confidentialResources= (text) => {
   return {
     "attachment":{
             "type":"template",
-            "payload":{
+            "payload": {
                 "template_type":"generic",
                 "elements":[
                     {
@@ -321,42 +321,16 @@ const confidentialResources= (text) => {
                         "default_action": {
                           "type": "web_url",
                           "url": "https://centers.rainn.org/"
+                          "webview_height_ratio": "tall",
                         },
                         "buttons": [
                         {
-                          "title": "Go",
                           "type": "web_url",
                           "url": "https://centers.rainn.org/"
-                          "messenger_extensions": true,
-                          "webview_height_ratio": "tall"
-                        }]
-                    }
-
-                ]
-            }
-        }
-    }
-}
-
-const confidentialResources= (text) => {
-  return {
-    "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text": text,
-                "buttons":[
-                    {
-                        "type":"postback",
-                        "title":"Confidential",
-                        "payload":"confidential"
-                    },
-                    {
-                        "type":"postback",
-                        "title":"Nonconfidential",
-                        "payload":"nonconfidential"
-                    }
-
+                          "title": "Go"
+                        }
+                        ]
+                    }ßßßß
                 ]
             }
         }
