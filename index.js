@@ -41,7 +41,9 @@ app.post('/webhook', (req, res) => {
         }
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
-      } 
+      } else if (webhook_event.quick_reply){
+        handlePostback(sender_psid,webhook_event.quick_reply);
+      }
       
     });
     // Return a '200 OK' response to all events
