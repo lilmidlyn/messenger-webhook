@@ -156,7 +156,8 @@ function handlePostback(sender_psid, received_postback) {
     response = nonconfidentialResources('Here are some nonconfidential resources:')
   }
   else if (payload === 'notsure') {
-    response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
+    response = underage("text": 'Does this work?')
+    //response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
   }
   else if (payload === 'underage') {
     response = underage("text": 'Does this work?')
