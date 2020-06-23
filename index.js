@@ -261,28 +261,25 @@ const underage = (text) => {
 
 const notSure = (text) => {
   return {
-    "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text": text,
-                "buttons":[
-                    {
-                        "type":"postback",
-                        "title":"Under 18",
-                        "payload":"underage"
-                    },
-                    {
-                        "type":"postback",
-                        "title":"Over 18",
-                        "payload":"adult"
-                    }
-
-                ]
-            }
+    "messaging_type": "RESPONSE"
+    "message": {
+      "text": text,
+      "quick_replies": [
+        {
+         "content_type": "text"
+         "title": "Under 18"
+         "payload": "underage" 
+        },
+        {
+          "content_type": "text"
+          "title": "Over 18"
+          "payload": "adult"
         }
+      ]
     }
+  }
 }
+
 
 const confidvsnon = (text) => {
   return {
@@ -309,28 +306,29 @@ const confidvsnon = (text) => {
     }
 }
 
-const confidentialResources = (text) => {
+const confidentialResources= (text) => {
   return {
-    "attachment": {
-    "type": "template",
-    "payload": {
-      "template_type": "generic",
-      "elements": [
-        {
-          "title": "RAINN",
-          "subtitle": "Hotline",
-          "item_url": "https://centers.rainn.org/",
-          "buttons": [
-            {
-              "type": "web_url",
-              "url": "https://centers.rainn.org/",
-              "title": "Open Web URL"
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
             }
-          ]
         }
-      ]
     }
-  }
 }
 
 
