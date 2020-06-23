@@ -261,23 +261,28 @@ const underage = (text) => {
 
 const notSure = (text) => {
   return {
-      "text": text,
-      "quick_replies": [
-        {
-         "content_type": "text"
-         "title": "Under 18"
-         "payload": "underage" 
-        },
-        {
-          "content_type": "text"
-          "title": "Over 18"
-          "payload": "adult"
-        }
-      ]
-    }
-  }
-  
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Under 18",
+                        "payload":"underage"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Over 18",
+                        "payload":"adult"
+                    }
 
+                ]
+            }
+        }
+    }
+}
 
 const confidvsnon = (text) => {
   return {
