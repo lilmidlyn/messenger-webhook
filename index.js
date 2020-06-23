@@ -312,33 +312,30 @@ const confidvsnon = (text) => {
 const confidentialResources = (text) => {
   return {
     "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type":"generic",
-                "elements":[
-                    {
-                        "title":"RAINN",
-                        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/RAINN_logo.svg/2560px-RAINN_logo.svg.png"
-                        "subtitle": "National Rape Hotline"
-                        "default_action": {
-                          "type": "web_url",
-                          "url": "https://centers.rainn.org/"
-                          "messenger_extensions": true
-                          "webview_height_ratio": "tall",
-                        }
-                      },
-                        "buttons": [
-                        {
-                          "type": "web_url",
-                          "url": "https://centers.rainn.org/"
-                          "title": "Go"
-                        }
-                        ]
-                    }
-                ]
+    "type": "template",
+    "payload": {
+      "template_type": "generic",
+      "elements": [
+        {
+          "title": "RAINN",
+          "subtitle": "Hotline",
+          "item_url": "https://centers.rainn.org/",
+          "buttons": [
+            {
+              "type": "web_url",
+              "url": "https://centers.rainn.org/",
+              "title": "Open Web URL"
+            },
+            {
+              "type": "postback",
+              "title": "Call Postback",
+              "payload": "Payload for first bubble"
             }
+          ]
         }
+      ]
     }
+  }
 }
 
 
