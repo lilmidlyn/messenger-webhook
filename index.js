@@ -314,22 +314,14 @@ const confidentialResources= (text) => {
     "attachment":{
             "type":"template",
             "payload":{
-                "template_type":"list",
-                "top_element_style": "compact",
+                "template_type":"generic",
                 "elements":[
                     {
                         "title":"RAINN",
-                        "buttons": [
-                        {
-                          "title": "Go",
+                        "default_action": {
                           "type": "web_url",
                           "url": "https://centers.rainn.org/"
-                          "messenger_extensions": true,
-                          "webview_height_ratio": "tall"
-                        }]
-                    },
-                    {
-                        "title":"RAINN",
+                        },
                         "buttons": [
                         {
                           "title": "Go",
