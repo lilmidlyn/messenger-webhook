@@ -259,6 +259,7 @@ const underage = (text) => {
 
 const notSure = (text) => {
   return {
+    "messaging_type": "RESPONSE",
     "message": {
       "text": text,
       "quick_replies": [
