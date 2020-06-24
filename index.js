@@ -420,6 +420,24 @@ const call911 = (text) => {
     }
   }
 
+  const localcenters = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"web_url",
+                        "url" : "https://centers.rainn.org/",
+                        "title":"Find RAINN help centers"
+                    }
+                ]
+            }
+        }
+    }
+
 
 function callSendAPI(sender_psid, response) {
   // Construct the message body
