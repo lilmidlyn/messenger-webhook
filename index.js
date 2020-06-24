@@ -154,16 +154,16 @@ function handlePostback(sender_psid, received_postback) {
       response = nonschoolreportingresources('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n  However, if there is for any reason you choose not to report through your school, there are also many nonaffiliated resources available as well. \n Please keep in mind that you are not limited to reporting just to your school; you can report both to your school staff as well as the police.')
   }
   else if (payload === 'nonschoolresources') {
-    response = reportingresources('There are many resources available. Remember you are not alone. RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.')
+    response = reportingresources('There are many resources available. Remember you are not alone. RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.')
   }
   else if (payload === 'notinschool') {
-    response = reportingresources('There are many resources available. Remember you are not alone.RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.')
+    response = reportingresources('There are many resources available. Remember you are not alone.RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.')
   }
   else if (payload === 'notsure') {
     response = notSure('It is common after sexual assault to be confused about how to react. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter. The following can be used as a guide to help you find support and resources. \n Are you under 18?')    
   }
   else if (payload === 'underage') {
-    response = reportingoptions('There is mandated reporting of the assault for those under 18. Would you like to report it?')
+    response = reportingoptions('There is mandated reporting of the assault for those under 18. \n Are you currently enrolled in school/university?')
   }
   else if (payload === 'adult') {
     response = adult('Is it recent?')
@@ -184,7 +184,7 @@ const nonschoolreportingresources = (text) => {
       "quick_replies": [
         {
          "content_type": "text",
-         "title": "Yes",
+         "title": "Find resources",
          "payload": "nonschoolresources" 
         }
       ]
