@@ -154,7 +154,7 @@ function handlePostback(sender_psid, received_postback) {
     response = reportingresources('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n \n However, there are also other nonaffiliated resources available as well.')
   }
   else if (payload === 'notinschool') {
-    response = reportingresources('Are you currently enrolled in school/university?')
+    response = reportingresources('There are many resources available. Remember you are not alone.')
   }
   else if (payload === 'notsure') {
     response = notSure('It is common after sexual assault to be confused about how to react. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter. The following can be used as a guide to help you find support and resources. \n Are you under 18?')    
@@ -166,7 +166,7 @@ function handlePostback(sender_psid, received_postback) {
     response = adult('Is it recent?')
   }
   else if (payload === 'recent') {
-    response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
+    response = recent('Getting medical attention after assault is crucial, even if you do not have any visible injuries. These medical exams are free and can be requested from almost all health centers and sexual assault crisis centers. \n Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
     response = notrecent('Even if assault is not recent, many surviors decide to report later on.')
@@ -500,25 +500,4 @@ function callSendAPI(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   }); 
-}
-
-function callGeocodingApi(address, sender_psid, callback){
-  request({
-    "url": `${GOOGLE_GEOCODING_API}${address}&key=${GOOGLE_GEOCODING_API_KEY}`,
-    "method": "GET"
-  }, (err, res, body) => {
-    console.log('after calling geocoding api with result:', body);
-    if (err) {
-      console.error("Unable to retrieve location from Google API:", err);
-    } else {
-      const bodyObj = JSON.parse(body);
-      if (bodyObj.status === 'OK'){
-        if (bodyObj.results && bodyObj.results[0] && bodyObj.results[0].geometry && bodyObj.results[0].geometry.location){
-          callback(sender_psid, bodyObj.results[0].geometry.location, bodyObj.results[0].formatted_address);
-        }
-      } else{
-        console.error("Unable to retrieve location (status non-OK):", bodyObj);
-      }
-    }
-  });
 }
