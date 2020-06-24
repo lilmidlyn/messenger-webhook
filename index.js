@@ -158,7 +158,7 @@ function handlePostback(sender_psid, received_postback) {
   }
   else if (payload === 'notsure') {
     response = notSure('It is common after sexual assault to be confused about how to react. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter. The following can be used as a guide to help you find support and resources. \n Are you under 18?')    
-  }
+  } 
   else if (payload === 'underage') {
     response = underage('There is mandated reporting of the assault for those under 18. Would you like to report it?')
   }
