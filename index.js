@@ -33,13 +33,8 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        if (webhook_event.message.quick_reply) {
-          handlePostback (sender_psid, webhook_event.quick_reply);
-        }
-        else {
-        handleMessage(sender_psid, webhook_event.message);  
-        }
-      } else if (webhook_event.postback) {
+          handlePostback (sender_psid, webhook_event.message.quick_reply);
+        } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
 
@@ -83,49 +78,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-function handleMessage(sender_psid, received_message) {
-  let response;
-  
-  // Checks if the message contains text
-  if (received_message.text) {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-    response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-    }
-  } else if (received_message.attachments) {
-    // Get the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is this the right picture?",
-            "subtitle": "Tap a button to answer.",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no",
-              }
-            ],
-          }]
-        }
-      }
-    }
-  } 
-  
-  // Send the response message
-  callSendAPI(sender_psid, response);    
-}
 
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
@@ -145,20 +97,14 @@ function handlePostback(sender_psid, received_postback) {
     response = call911('Would you like to call 911?')
   }
   else if (payload === 'medicalhelp') {
-    response = {"text": 'Please share your location so we can find the nearest health centers'}
+    response = localcenters('RAINN offers a directory of local sexual assault crisis centers that can help you.')
   }
   else if (payload === 'report') {
-    response = confidvsnon('Would you rather be speak to a confidential resource?')
-  }
-  else if (payload === 'confidential') {
-    response = confidentialResources('Here are some confidential resources:')
-  }
-  else if (payload === 'nonconfidential'){
-    response = nonconfidentialResources('Here are some nonconfidential resources:')
-  }
+    response = report('Reporting sexual assault is completely your choice. Reporting can help seek justice and begin the healing process for you. There are many options to report sexual assault and seek help. Remember you are not alone.')
+
   else if (payload === 'notsure') {
     //response = {"text": 'Does this work?'}
-    response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
+    response = notSure('It is common after sexual assault to be confused about how to react. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
   }
   else if (payload === 'underage') {
     response = {"text": 'Does this work?'}
