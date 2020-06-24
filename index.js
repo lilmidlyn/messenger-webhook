@@ -151,13 +151,13 @@ function handlePostback(sender_psid, received_postback) {
     response = reportingoptions('Are you currently enrolled in school/university?')
   }
   else if (payload === 'inschool') {
-    response = reportingresources('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n  However, there are also other nonaffiliated resources available as well.')
+    response = reportingresources('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n \n However, there are also other nonaffiliated resources available as well.')
   }
   else if (payload === 'notinschool') {
     response = reportingresources('Are you currently enrolled in school/university?')
   }
   else if (payload === 'notsure') {
-    response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
+    response = notSure('It is common after sexual assault to be confused about how to react. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter. The following can be used as a guide to help you find support and resources. \n Are you under 18?')    
   }
   else if (payload === 'underage') {
     response = underage('There is mandated reporting of the assault for those under 18. Would you like to report it?')
@@ -299,7 +299,7 @@ const underage = (text) => {
                     {
                         "type":"postback",
                         "title":"Yes",
-                        "payload":"report"
+                        "payload":"reportingoptions"
                     }
 
                 ]
