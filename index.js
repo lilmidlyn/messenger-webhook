@@ -148,19 +148,13 @@ function handlePostback(sender_psid, received_postback) {
     response = localcenters('RAINN offers a directory of local sexual assault crisis centers.')
   }
   else if (payload === 'report') {
-    response = confidvsnon('Would you rather be speak to a confidential resource?')
-  }
-  else if (payload === 'confidential') {
-    response = confidentialResources('Here are some confidential resources:')
-  }
-  else if (payload === 'nonconfidential'){
-    response = nonconfidentialResources('Here are some nonconfidential resources:')
+    response = reportingoptions('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n  However, there are also other nonaffiliated resources available as well.')
   }
   else if (payload === 'notsure') {
     response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
   }
   else if (payload === 'underage') {
-    response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
+    response = underage('There is mandated reporting of the assault for those under 18. Would you like to report it?')
   }
   else if (payload === 'adult') {
     response = adult('Is it recent?')
@@ -169,11 +163,30 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
+    response = notrecent('Even if assault is not recent, many surviors decide to report later on.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
+
+const reportingoptions = (text) => {
+  return {
+      "text": text,
+      "quick_replies": [
+        {
+         "content_type": "text",
+         "title": "Yes",
+         "payload": "inschool" 
+        },
+        {
+          "content_type": "text",
+          "title": "No",
+          "payload": "notinschool"
+        }
+      ]
+    }
+  }
+
 
 const localcenters = (text) => {
   return {
