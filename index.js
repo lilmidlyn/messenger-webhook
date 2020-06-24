@@ -145,7 +145,7 @@ function handlePostback(sender_psid, received_postback) {
     response = call911('Would you like to call 911?')
   }
   else if (payload === 'medicalhelp') {
-    response = localcenters('RAINN offers a directory of local sexual assault crisis centers.')
+    response = localcenters('You can find medical help for sexual assault all health centers. However, if you want specific medical help for sexual assault, you can search for a local service provider through RAINN. They can help guide you through the process of receiving medical care and sexual assault forensic exam (also known as a rape kit). Although the sexual assault forensic exam is not mandatory and they cannot force you to take one, it is recommended to collect evidence in the case that you do decide to report the crime in the future.')
   }
   else if (payload === 'report') {
     response = reportingoptions('Are you currently enrolled in school/university?')
@@ -166,7 +166,7 @@ function handlePostback(sender_psid, received_postback) {
     response = adult('Is it recent?')
   }
   else if (payload === 'recent') {
-    response = recent('Getting medical attention after assault is crucial, even if you do not have any visible injuries. These medical exams are free and can be requested from almost all health centers and sexual assault crisis centers. \n Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
+    response = recent('Getting medical attention after assault is crucial, even if you do not have any visible injuries. \n Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
     response = notrecent('Even if assault is not recent, many surviors decide to report later on.')
