@@ -148,7 +148,13 @@ function handlePostback(sender_psid, received_postback) {
     response = localcenters('RAINN offers a directory of local sexual assault crisis centers.')
   }
   else if (payload === 'report') {
+    response = reportingoptions('Are you currently enrolled in school/university?')
+  }
+  else if (payload === 'inschool') {
     response = reportingoptions('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n  However, there are also other nonaffiliated resources available as well.')
+  }
+  else if (payload === 'notinschool') {
+    response = reportingoptions('Are you currently enrolled in school/university?')
   }
   else if (payload === 'notsure') {
     response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
