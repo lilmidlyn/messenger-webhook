@@ -155,11 +155,12 @@ function handlePostback(sender_psid, received_postback) {
   }
   else if (payload === 'notinschool') {
     response = reportingresources('There are many resources available. Remember you are not alone.')
+  }
   else if (payload === 'notsure') {
     response = notSure('It is common after sexual assault to be confused about how to react. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter. The following can be used as a guide to help you find support and resources. \n Are you under 18?')    
-  } 
+  }
   else if (payload === 'underage') {
-    response = underage('There is mandated reporting of the assault for those under 18. Would you like to report it?')
+    response = reportingoptions('There is mandated reporting of the assault for those under 18. Would you like to report it?')
   }
   else if (payload === 'adult') {
     response = adult('Is it recent?')
@@ -168,7 +169,7 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Getting medical attention after assault is crucial, even if you do not have any visible injuries. \n Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('Even if assault is not recent, many surviors decide to report later on. There are many resources you can reach out to for help to begin the reporting process.')
+    response = notrecent('Even if assault is not recent, many surviors decide to report later on.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -180,7 +181,7 @@ const reportingresources = (text) => {
             "type":"template",
             "payload":{
                 "template_type":"button",
-                "text": "RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n \n  NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.",
+                "text": text,
                 "buttons":[
                     {
                         "type":"web_url",
