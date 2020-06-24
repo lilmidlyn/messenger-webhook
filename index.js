@@ -187,7 +187,18 @@ const reportingresources = (text) => {
                         "type":"web_url",
                         "url" : "https://centers.rainn.org/",
                         "title":"Find RAINN help centers"
+                    },
+                    {
+                        "type":"web_url",
+                        "url" : "https://www.nsvrc.org/organizations",
+                        "title":"Find NSVRC organizations"
+                    },
+                    {
+                        "type":"web_url",
+                        "url" : "https://secure2.convio.net/ywca/site/SPageServer;jsessionid=00000000.app216a?pagename=YWCA_Map&NONCE_TOKEN=B2B8790BD56441665CF0F8B1745E4AA2",
+                        "title":"Find YWCA centers"
                     }
+
                 ]
             }
         }
