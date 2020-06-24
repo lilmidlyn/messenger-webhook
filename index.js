@@ -151,7 +151,11 @@ function handlePostback(sender_psid, received_postback) {
     response = reportingoptions('Are you currently enrolled in school/university?')
   }
   else if (payload === 'inschool') {
-    response = reportingresources('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n \n However, there are also other nonaffiliated resources available as well. \n \n RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n \n  NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.')
+      response = {"text": "does this work?"}
+      //response = nonschoolreportingresources('Often schools and universities have counselors and staff trained to help sexual assault victims. If you are currently enrolled in a university, your campus most likely has a Title IX office who can help you with filing a report both through the university and officially with the police. \n \n However, there are also other nonaffiliated resources available as well.')
+  }
+  else if (payload === 'nonschoolresources') {
+    response = reportingresources('There are many resources available. Remember you are not alone. RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n \n  NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.')
   }
   else if (payload === 'notinschool') {
     response = reportingresources('There are many resources available. Remember you are not alone.RAINN is a confidential anti-sexual violence organization with a 24/7 hotline and many available resources. They have a large network of affiliates who can support you either with finding medical services and reporting sexual assault. \n \n  NSVRC is a national network of community-based crisis centers and local organizations that support sexual assault survivors. NSVRC maintains a directory of organizations that provide resources such as advocacy, accompaniment, follow-up services, as well as referrals to other resources. \n \n YWCA is network of domestic and sexual violence service providers for women. They provide safe housing, crisis hotlines, counseling, and court assistance to women, children, and families.')
@@ -174,6 +178,19 @@ function handlePostback(sender_psid, received_postback) {
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
+
+const nonschoolreportingresources = (text) => {
+  return {
+      "text": text,
+      "quick_replies": [
+        {
+         "content_type": "text",
+         "title": "Yes",
+         "payload": "nonschoolresources" 
+        }
+      ]
+    }
+  }
 
 const reportingresources = (text) => {
   return {
