@@ -174,8 +174,8 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Getting medical attention after assault is crucial, even if you do not have any visible injuries. \n Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('???')
-    //response = notrecent('There are many legitimate reasons why some choose not to report or dely reporting the assault. Women who do report sexual assault say that they do so to find justice for themselves, protect themselves from further assault, prevent recurrence or escalation, felt a duty to do so, get help or recover, etc. \n The current statue of limitations vary from state to state, however, many efforts have been made to push the statue of limitations further or even to remove the statue of limitations for sexual crimes. Even if assault is not recent, many surviors decide to report later. Should you choose to do so, there are many resources available.')
+    //response = notrecent('???')
+    response = notrecent('There are many legitimate reasons why some choose not to report or dely reporting the assault. Women who do report sexual assault say that they do so to find justice for themselves, protect themselves from further assault, prevent recurrence or escalation, felt a duty to do so, get help or recover, etc. \n The current statue of limitations vary from state to state, however, many efforts have been made to push the statue of limitations further or even to remove the statue of limitations for sexual crimes. Even if assault is not recent, many surviors decide to report later. Should you choose to do so, there are many resources available.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
