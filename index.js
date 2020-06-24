@@ -145,7 +145,7 @@ function handlePostback(sender_psid, received_postback) {
     response = call911('Would you like to call 911?')
   }
   else if (payload === 'medicalhelp') {
-    response = {"text": 'Please share your location so we can find the nearest health centers'}
+    response = localcenters('RAINN offers a directory of local sexual assault crisis centers.')
   }
   else if (payload === 'report') {
     response = confidvsnon('Would you rather be speak to a confidential resource?')
@@ -157,21 +157,19 @@ function handlePostback(sender_psid, received_postback) {
     response = nonconfidentialResources('Here are some nonconfidential resources:')
   }
   else if (payload === 'notsure') {
-    //response = {"text": 'Does this work?'}
     response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
   }
   else if (payload === 'underage') {
-    response = {"text": 'Does this work?'}
-    //response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
+    response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
   }
   else if (payload === 'adult') {
     response = adult('Is it recent?')
   }
   else if (payload === 'recent') {
-    response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
+    response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep rape kit.')
+    response = notrecent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -217,28 +215,21 @@ const recent = (text) => {
 
 const adult = (text) => {
   return {
-    "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text": text,
-                "buttons":[
-                    {
-                        "type":"postback",
-                        "title":"Yes",
-                        "payload":"recent"
-                    },
-                    {
-                        "type":"postback",
-                        "title":"No",
-                        "payload":"notrecent"
-                    }
-
-                ]
-            }
+      "text": text,
+      "quick_replies": [
+        {
+         "content_type": "text",
+         "title": "Yes",
+         "payload": "recent" 
+        },
+        {
+          "content_type": "text",
+          "title": "No",
+          "payload": "notrecent"
         }
+      ]
     }
-}
+  }
 
 const underage = (text) => {
   return {
@@ -353,7 +344,7 @@ const nonconfidentialResources= (text) => {
             }
         }
     }
-}
+} 
 
 const ifEmergency = (text) => {
   return {
