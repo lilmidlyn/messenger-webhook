@@ -169,7 +169,7 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Getting medical attention after assault is crucial, even if you do not have any visible injuries. \n Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('Even if assault is not recent, many surviors decide to report later on.')
+    response = notrecent('Even if assault is not recent, many surviors decide to report later on. There are many resources you can reach out to for help to begin the reporting process.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
