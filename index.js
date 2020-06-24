@@ -148,13 +148,19 @@ function handlePostback(sender_psid, received_postback) {
     response = localcenters('RAINN offers a directory of local sexual assault crisis centers.')
   }
   else if (payload === 'report') {
-    response = reportingoptions('Often schools and universities have counselors and staff trained to help sexual assault victims. However, there are also other nonaffiliated resources available as well.')
+    response = confidvsnon('Would you rather be speak to a confidential resource?')
+  }
+  else if (payload === 'confidential') {
+    response = confidentialResources('Here are some confidential resources:')
+  }
+  else if (payload === 'nonconfidential'){
+    response = nonconfidentialResources('Here are some nonconfidential resources:')
   }
   else if (payload === 'notsure') {
-    response = notSure('It is common after sexual assault to be confused about how to react. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter. The below can help serve as a guide to begin to think about what you can do.')    
+    response = notSure('It is common after sexual assault to be confused about how to react. The following can be used as a guide to help you find support and resources. Sexual consent consists of underage sex or absence of voluntary consent for the entirety of the sexual encounter.')    
   }
   else if (payload === 'underage') {
-    response = underage('There is mandated reporting of the assault for those under 18. Would you like to report it?')
+    response = underage('All sexual encounters underage is sexual assault. Would you like to report it?')
   }
   else if (payload === 'adult') {
     response = adult('Is it recent?')
@@ -163,10 +169,29 @@ function handlePostback(sender_psid, received_postback) {
     response = recent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   else if (payload === 'notrecent') {
-    response = notrecent('Even if assault is not recent, many surviors decide to report later on.')
+    response = notrecent('Please refrain from washing and get a medical rape kit. Even if you do not wish to report now, you can still keep the rape kit.')
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
+}
+
+const localcenters = (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"web_url",
+                        "url" : "https://centers.rainn.org/",
+                        "title":"Find RAINN help centers"
+                    }
+                ]
+            }
+        }
+    }
 }
 
 const notrecent = (text) => {
@@ -264,25 +289,81 @@ const notSure = (text) => {
   }
 
 
-const reportingoptions = (text) => {
+const confidvsnon = (text) => {
   return {
-      "text": text,
-      "quick_replies": [
-        {
-         "content_type": "text",
-         "title": "Yes",
-         "payload": "inschool" 
-        },
-        {
-          "content_type": "text",
-          "title": "No",
-          "payload": "notinschool"
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
+            }
         }
-      ]
     }
-  }
+}
+
+const confidentialResources= (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
+            }
+        }
+    }
+}
 
 
+const nonconfidentialResources= (text) => {
+  return {
+    "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text": text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Confidential",
+                        "payload":"confidential"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Nonconfidential",
+                        "payload":"nonconfidential"
+                    }
+
+                ]
+            }
+        }
+    }
+} 
 
 const ifEmergency = (text) => {
   return {
@@ -357,24 +438,6 @@ const call911 = (text) => {
         }
     }
   }
-
-  const localcenters = (text) => {
-  return {
-    "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text": text,
-                "buttons":[
-                    {
-                        "type":"web_url",
-                        "url" : "https://centers.rainn.org/",
-                        "title":"Find RAINN help centers"
-                    }
-                ]
-            }
-        }
-    }
 
 
 function callSendAPI(sender_psid, response) {
